@@ -12,3 +12,4 @@ Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
 Route::get('/',[UserController::class,'landing'])->name('landing.register');
 Route::post('/ppdb',[UserController::class,'registerPost'])->name('landing.registerPost');
+Route::get('/siswa/profile/{id}',[UserController::class,'profile'])->name('profile');

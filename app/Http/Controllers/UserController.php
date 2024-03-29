@@ -19,10 +19,26 @@ class UserController extends Controller
 
     public function postLogin(Request $request){
         if (Auth::attempt($request->only('username','password'))) {
-            return redirect('/dashboard');
+            $user = Auth::user(); // Mendapatkan informasi user yang sedang login
+
+            // Cek role pengguna dan arahkan sesuai dengan rolenya
+            if ($user->role === 'admin') {
+                return redirect('/dashboard');
+            } elseif ($user->role === 'siswa') {
+                $student = siswaBaru::where('user_id', $user->id)->first(); // Ambil data siswa berdasarkan user_id
+                if ($student) {
+                    return redirect('/siswa/profile/'.$student->id); // Mengarahkan ke profil siswa berdasarkan ID siswa
+                }
+                // Jika tidak ada data siswa yang sesuai, bisa diarahkan ke halaman lain atau ditangani sesuai kebutuhan
+                return redirect('/login')->with('gagal','Pastikan username dan password benar');
+            }
+
+            // Jika tidak ada peran yang sesuai, bisa diarahkan ke halaman lain atau ditangani sesuai kebutuhan
+            return redirect('/login')->with('gagal','Pastikan username dan password benar');
         }
         return redirect('/login')->with('gagal','Pastikan username dan password benar');
     }
+
 
     public function logout(){
         Auth::logout();
@@ -61,5 +77,13 @@ class UserController extends Controller
         $request->request->add(['user_id'=>$user->id]);
         siswaBaru::create($request->all());
         return back()->with('success','Data berhasil disimpan, silakan login');
+    }
+    public function profile() {
+        // Mendapatkan user ID pengguna yang sedang login
+        $userId = Auth::id();
+
+        // Mendapatkan data siswa berdasarkan user ID pengguna yang sedang login
+        $siswaBaru = SiswaBaru::where('user_id', $userId)->first();
+        return view('components.siswa.profile', compact('siswaBaru'));
     }
 }
