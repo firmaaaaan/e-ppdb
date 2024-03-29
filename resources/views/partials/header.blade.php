@@ -3,13 +3,9 @@
       <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button"
         data-bs-toggle="dropdown" aria-expanded="false">
         <span class="d-none d-md-block">{{ auth()->user()->name }}</span>
-        <img src="{{ asset('assets') }}/images/user3.png" class="img-3x m-2 me-0 rounded-5" alt="Bootstrap Gallery" />
+        <img src="{{ asset('assets') }}/images/user3.png" class="img-3x m-2 me-0 rounded-5" alt="{{ auth()->user()->name }}" />
       </a>
       <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">
-        <a class="dropdown-item d-flex align-items-center py-2" href="agent-profile.html"><i
-            class="icon-smile fs-4 me-3"></i>Profil siswa</a>
-        <a class="dropdown-item d-flex align-items-center py-2" href="account-settings.html"><i
-            class="icon-settings fs-4 me-3"></i>Pengaturan akun</a>
         <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('logout') }}"><i
             class="icon-log-out fs-4 me-3"></i>Keluar</a>
       </div>

@@ -55,10 +55,10 @@
                 <!-- App brand starts -->
                 <div class="app-brand">
                   <a href="index.html" class="d-lg-block d-none">
-                    <img src="{{ asset('assets') }}/images/logo.svg" class="logo" alt="Bootstrap Gallery" />
+                    <img src="{{ asset('logo.jpg') }}" class="logo" alt="Bootstrap Gallery" />
                   </a>
                   <a href="index.html" class="d-lg-none d-md-block">
-                    <img src="{{ asset('assets') }}/images/logo-sm.svg" class="logo" alt="Bootstrap Gallery" />
+                    <img src="{{ asset('logo.jpg') }}" class="logo" alt="Bootstrap Gallery" />
                   </a>
                 </div>
                 <!-- App brand ends -->

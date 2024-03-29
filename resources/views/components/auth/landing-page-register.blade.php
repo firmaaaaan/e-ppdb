@@ -123,7 +123,7 @@
                         </div>
                         <div class="form-group">
                             <label for="no_hp">No Handphone*</label>
-                            <input name="no_hp" type="number" class="form-control" id="" placeholder="No HP Whatsapp">
+                            <input name="no_hp" type="number" class="form-control" id="" placeholder="No HP Whatsapp" value="0">
                         </div>
                         <div class="form-group">
                             <label for="no_hp">Email*</label>

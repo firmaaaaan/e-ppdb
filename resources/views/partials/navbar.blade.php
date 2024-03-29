@@ -24,7 +24,7 @@
                 <a class="dropdown-item" href="open-tickets.html"><span>Periode pendaftaran</span></a>
               </li>
               <li>
-                <a class="dropdown-item" href="pending-tickets.html"><span>Siswa baru</span></a>
+                <a class="dropdown-item" href="{{ route('siswa.show') }}"><span>Siswa baru</span></a>
               </li>
             </ul>
           </li>
