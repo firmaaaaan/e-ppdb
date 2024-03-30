@@ -86,4 +86,17 @@ class UserController extends Controller
         $siswaBaru = SiswaBaru::where('user_id', $userId)->first();
         return view('components.siswa.profile', compact('siswaBaru'));
     }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user = Auth::user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return back()->with('berhasil', 'Password berhasil diupload.');
+    }
 }

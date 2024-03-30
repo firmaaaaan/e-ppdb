@@ -172,6 +172,19 @@
             </div>
             <div class="card-body">
               <div id="callsGraph"></div>
+              @if ($message = Session::get('berhasil'))
+                        <div class="alert alert-success alert-block mb-2">
+                            <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+                        </div>
+                @endif
+              <form action="{{ route('changePassword') }}" method="POST">
+                @csrf
+                <label for="new_password">Password baru</label>
+                <input type="password" class="form-control" name="new_password" id="new_password" required>
+                <label for="new_password_confirmation">Konfirmasi password</label>
+                <input type="password" class="form-control" name="new_password_confirmation" id="new_password_confirmation" required>
+                <button type="submit" class="btn btn-success btn-md mt-3">Ubah password</button>
+            </form>
             </div>
           </div>
         </div>

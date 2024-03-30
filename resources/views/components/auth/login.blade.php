@@ -37,7 +37,7 @@
                         @csrf
 						<div class="card p-md-4 p-sm-3">
 							<div class="login-form">
-								<a href="index.html" class="mb-4 d-flex">
+								<a  class="mb-4 d-flex">
 									<img src="{{ asset('logo.jpg') }}" class="img-fluid login-logo" alt="Bootstrap Gallery" />
 								</a>
 								<h2 class="mt-4 mb-4">SD Sengon 03</h2>
@@ -59,35 +59,16 @@
 										</a>
 									</div>
 								</div>
-								<div class="d-flex align-items-center justify-content-between">
-									<div class="form-check m-0">
-										<input class="form-check-input" type="checkbox" value="" id="rememberPassword" />
-										<label class="form-check-label" for="rememberPassword">Remember</label>
-									</div>
-									<a href="forgot-password.html" class="text-success text-decoration-underline">Lost password?</a>
-								</div>
 								<div class="d-grid py-3 mt-3">
 									<button type="submit" class="btn btn-lg btn-success">
 										LOGIN
 									</button>
 								</div>
-								{{-- <div class="text-center py-2">or Login with</div>
-								<div class="btn-group w-100">
-									<button type="button" class="btn btn-sm btn-outline-light">
-										Google
-									</button>
-									<button type="button" class="btn btn-sm btn-outline-light">
-										Facebook
-									</button>
-									<button type="button" class="btn btn-sm btn-outline-light">
-										Twitter
-									</button>
-								</div>
 								<div class="text-center pt-4">
 									<span>Not registered?</span>
-									<a href="signup.html" class="text-success text-decoration-underline">
-										SignUp</a>
-								</div> --}}
+									<a href="{{ route('landing.register') }}" class="text-success text-decoration-underline">
+										Daftar</a>
+								</div>
 							</div>
 						</div>
 					</form>

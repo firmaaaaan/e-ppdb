@@ -14,6 +14,10 @@ Route::get('/logout',[UserController::class,'logout'])->name('logout');
 
 Route::get('/',[UserController::class,'landing'])->name('landing.register');
 Route::post('/ppdb',[UserController::class,'registerPost'])->name('landing.registerPost');
-Route::get('/siswa/profile/{id}',[UserController::class,'profile'])->name('profile');
-Route::post('/update/profile/{id}',[siswaBaruController::class,'update'])->name('update.profile');
-Route::get('/data-siswa',[SiswaBaruController::class,'show'])->name('siswa.show');
+
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('/siswa/profile/{id}',[UserController::class,'profile'])->name('profile');
+    Route::post('/update/profile/{id}',[siswaBaruController::class,'update'])->name('update.profile');
+    Route::get('/data-siswa',[SiswaBaruController::class,'show'])->name('siswa.show');
+    Route::post('/ubah-password',[UserController::class,'changePassword'])->name('changePassword');
+});

@@ -25,6 +25,8 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/main.min.css" />
+    @yield('dataTablesCss')
+
 
     <!-- *************
 			************ Vendor Css Files *************
@@ -155,6 +157,7 @@
 
     <!-- Custom JS files -->
     <script src="{{ asset('assets') }}/js/custom.js"></script>
+    @yield('dataTablesScript')
   </body>
 
 </html>
