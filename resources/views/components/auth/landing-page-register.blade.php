@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>PPDB Online SMP DATA</title>
+  <title>PPDB Online SD Sengon 03</title>
   <meta content="" name="descriptison">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="logo.jpg" rel="icon">
+  <link href="logo2.png" rel="icon">
   <link href="lp/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -44,24 +44,16 @@
     <div class="container d-flex">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href=""><img src="logo.jpg" alt=""><span>PPDB Online</span></a></h1>
+        <h1 class="text-light"><a href=""><img src="logo.jpg" alt=""><span> PPDB Online</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="/">Home</a></li>
-          <li><a href="">Daftar</a></li>
           <li><a href="{{ route('login')  }}">Login <i class="bi bi-box-arrow-in-right"></i></a></li>
         </ul>
       </nav><!-- .nav-menu -->
-
-      <div class="header-social-links">
-        <a href="#" class="twitter"><i class="icofont-twitter"></i></a>
-        <a href="https://www.facebook.com/groups/1499446273665034/?ref=bookmarks" class="facebook"><i class="icofont-facebook"></i></a>
-        <a href="#" class="instagram"><i class="icofont-instagram"></i></a>
-      </div>
 
     </div>
   </header><!-- End Header -->
@@ -74,8 +66,16 @@
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="fade-up">
         <div>
             <h1>Selamat Datang Di Website PPDB Online</h1>
-            <h2>SD Sengon 03 Tanjung-Brebes Tahun Pelajaran 2020/2021</h2>
-            <a class="btn-get-started scrollto">Daftar Sekarang</a>
+            <h2>SD Sengon 03 Tanjung-Brebes @if($periodes)
+                <p>{{ $periodes->nama_periode }}</p>
+            @else
+                <p> - </p>
+            @endif</h2>
+            <div class="mb-2">
+                Tanggal Pendaftaran : @if ($periodes) {{ \Carbon\Carbon::parse($periodes->tgl_mulai)->format('d F Y') }} - {{ \Carbon\Carbon::parse($periodes->tgl_berakhir)->format('d F Y') }}
+
+                @endif
+            </div>
         </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="fade-left">
@@ -103,47 +103,75 @@
                             <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
                         </div>
                         @endif
+                        @if ($periodeAktif)
                         <form action="{{ route('landing.registerPost') }}" method="POST" class="forms-sample">
                             @csrf
-                        {{-- <div class="form-group">
-                            <label for="exampleInputName1">Periode Pendaftaran</label>
-                            <input type="text" class="form-control" id="exampleInputName1" placeholder="Name">
-                        </div> --}}
-                        <div class="form-group">
-                            <div class="row mt-2">
-                                <div class="col-md-6 mt-2">
-                                    <label class="labels">Username</label>
-                                    <input type="text" name="username" class="form-control" placeholder="Username" value="">
-                                </div>
-                                <div class="col-md-6 mt-2">
-                                    <label class="labels">Nama Lengkap</label>
-                                    <input type="text" name="name" class="form-control" value="" placeholder="Nama lengkap">
+                            <div class="form-group">
+                                <label for="exampleInputName1">Periode Pendaftaran</label>
+                                <input type="hidden" name="periode_id" value="{{ $periodes->id }}" class="form-control" id="exampleInputName1" >
+                            </div>
+                            <div class="form-group">
+                                <div class="row mt-2">
+                                    <div class="col-md-6 mt-2">
+                                        <label class="labels">Username</label>
+                                        <input type="text" name="username" class="form-control @error('username') is-invalid
+                                        @enderror" placeholder="Username" value="{{ old('username') }}">
+                                        @error('username')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-6 mt-2">
+                                        <label class="labels">Nama Lengkap</label>
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid
+                                        @enderror" value="{{ old('name') }}" placeholder="Nama lengkap">
+                                        @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="no_hp">No Handphone*</label>
-                            <input name="no_hp" type="number" class="form-control" id="" placeholder="No HP Whatsapp" value="0">
-                        </div>
-                        <div class="form-group">
-                            <label for="no_hp">Email*</label>
-                            <input name="email" type="email" class="form-control" id="" placeholder="Email">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Tempat Lahir*</label>
-                            <input name="tempat_lahir" type="text" class="form-control" id="" placeholder="Tempat Lahir">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Tanggal Lahir*</label>
-                            <input name="tanggal_lahir" type="date" class="form-control" id="" placeholder="Tanggal Lahir">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword4">Password* (Mohon Diingat)</label>
-                            <input name="password" type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-success mr-2">Simpan Data</button>
-                        <button class="btn btn-light">Cancel</button>
+                            <div class="form-group">
+                                <label for="no_hp">No Handphone*</label>
+                                <input name="no_hp" type="number" class="form-control @error('no_hp') is-invalid
+                                @enderror" id="" placeholder="No HP Whatsapp" value="{{ old('no_hp') }}">
+                                @error('no_hp')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="no_hp">Email*</label>
+                                <input name="email" type="email" class="form-control" id="" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tempat Lahir*</label>
+                                <input name="tempat_lahir" type="text" class="form-control @error('tempat_lahir') is-invalid
+                                @enderror" id="" value="{{ old('tempat_lahir') }}" placeholder="Tempat Lahir">
+                                @error('tempat_lahir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="">Tanggal Lahir*</label>
+                                <input name="tanggal_lahir" type="date" class="form-control @error('tanggal_lahir') is-invalid
+                                @enderror" id="" value="{{ old('tanggal_lahir') }}" placeholder="Tanggal Lahir">
+                                @error('tanggal_lahir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword4">Password* (Mohon Diingat)</label>
+                                <input name="password" type="password" class="form-control @error('password')
+                                @enderror" id="exampleInputPassword4" value="{{ old('password') }}" placeholder="Password">
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <button type="submit" class="btn btn-success mr-2">Simpan Data</button>
+                            <button class="btn btn-light">Cancel</button>
                         </form>
+                        @else
+                        <h5>Mohon Maaf Pendaftaran ditutup</h5>
+                        @endif
                     </div>
                     </div>
                 </div>
@@ -178,20 +206,14 @@
                     <div class="card-statistic-3 p-4">
                         <div class="card-icon card-icon-large"></div>
                         <div class="mb-4">
-                            <h5 class="card-title mb-0">New Orders</h5>
+                            <h5 class="card-title mb-0">Pendaftar</h5>
                         </div>
                         <div class="row align-items-center mb-2 d-flex">
                             <div class="col-8">
-                                <h2 class="d-flex align-items-center mb-0">
-                                    3,243
-                                </h2>
+                                <h1 class="d-flex align-items-center mb-0">
+                                    {{ $jumlahSiswaBaru }}
+                                </h1>
                             </div>
-                            <div class="col-4 text-right">
-                                <span>12.5% <i class="fa fa-arrow-up"></i></span>
-                            </div>
-                        </div>
-                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
-                            <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
                         </div>
                     </div>
                 </div>
@@ -201,66 +223,14 @@
                     <div class="card-statistic-3 p-4">
                         <div class="card-icon card-icon-large"></div>
                         <div class="mb-4">
-                            <h5 class="card-title mb-0">Customers</h5>
+                            <h5 class="card-title mb-0">Sisa Kuota Pendaftar</h5>
                         </div>
                         <div class="row align-items-center mb-2 d-flex">
                             <div class="col-8">
-                                <h2 class="d-flex align-items-center mb-0">
-                                    15.07k
-                                </h2>
+                                <h1 class="d-flex align-items-center mb-0">
+                                    {{ $sisaKuota }}
+                                </h1>
                             </div>
-                            <div class="col-4 text-right">
-                                <span>9.23% <i class="fa fa-arrow-up"></i></span>
-                            </div>
-                        </div>
-                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
-                            <div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-6">
-                <div class="card l-bg-green-dark">
-                    <div class="card-statistic-3 p-4">
-                        <div class="card-icon card-icon-large"></div>
-                        <div class="mb-4">
-                            <h5 class="card-title mb-0">Ticket Resolved</h5>
-                        </div>
-                        <div class="row align-items-center mb-2 d-flex">
-                            <div class="col-8">
-                                <h2 class="d-flex align-items-center mb-0">
-                                    578
-                                </h2>
-                            </div>
-                            <div class="col-4 text-right">
-                                <span>10% <i class="fa fa-arrow-up"></i></span>
-                            </div>
-                        </div>
-                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
-                            <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-6">
-                <div class="card l-bg-orange-dark">
-                    <div class="card-statistic-3 p-4">
-                        <div class="card-icon card-icon-large"></div>
-                        <div class="mb-4">
-                            <h5 class="card-title mb-0">Revenue Today</h5>
-                        </div>
-                        <div class="row align-items-center mb-2 d-flex">
-                            <div class="col-8">
-                                <h2 class="d-flex align-items-center mb-0">
-                                    $11.61k
-                                </h2>
-                            </div>
-                            <div class="col-4 text-right">
-                                <span>2.5% <i class="fa fa-arrow-up"></i></span>
-                            </div>
-                        </div>
-                        <div class="progress mt-1 " data-height="8" style="height: 8px;">
-                            <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
                         </div>
                     </div>
                 </div>
@@ -279,22 +249,15 @@
             <div class="footer-info">
               <h3>SD Sengon 03 Tanjung-Brebes</h3>
               <p>
-               Alamat : Jl. KH. Ashary Pabeyan Tambakboyo Tuban <br>
+               Alamat : Sengon Wetan, Sengon, Kec. Tj., Kabupaten Brebes, Jawa Tengah 52254 <br>
                 <strong>HP :</strong> 0852-0456-3827<br>
-                <strong>Email :</strong> s.daruttauhid@yahoo.com<br>
+                <strong>Email :</strong> ----- <br>
               </p>
-              <div class="social-links mt-3">
-                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-              </div>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6 footer-newsletter">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6662.81052201679!2d111.83356195314701!3d-6.8025630204564544!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x209ccb1c8695a44e!2sSMP%20Darut%20Tauhid%20Tambakboyo!5e0!3m2!1sid!2sid!4v1585570723554!5m2!1sid!2sid" width="370" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>            <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 250px;" allowfullscreen></iframe> -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1014035.5885955846!2d107.86293492136284!3d-6.8814368456060535!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fa71424b0c075%3A0xec3bdd6ab24fc836!2sSDN%20Sengon%2003!5e0!3m2!1sen!2sid!4v1712218357990!5m2!1sen!2sid" width="400" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
 
         </div>

@@ -2,13 +2,15 @@
     <div class="dropdown ms-2">
       <a class="dropdown-toggle d-flex align-items-center user-settings" href="#!" role="button"
         data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="d-none d-md-block">{{ auth()->user()->name }}</span>
-        <img src="{{ asset('assets') }}/images/user3.png" class="img-3x m-2 me-0 rounded-5" alt="{{ auth()->user()->name }}" />
+        <h5 class="d-none d-md-block mt-4">{{ auth()->user()->name }}</h5>
       </a>
       <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">
         <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('logout') }}"><i
             class="icon-log-out fs-4 me-3"></i>Keluar</a>
       </div>
+      {{-- <div class="dropdown-menu dropdown-menu-end dropdown-menu-sm shadow-sm gap-3" style="">
+        <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('user.password') }}"><i class="bi bi-key"></i>Ubah Password</a>
+      </div> --}}
     </div>
 
     <!-- Toggle Menu starts -->

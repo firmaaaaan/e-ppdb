@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\siswaBaru;
+use App\Models\Periode;
 // use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -46,26 +47,50 @@ class UserController extends Controller
     }
 
     public function landing() {
-        return view('components.auth.landing-page-register');
+        $periodes = Periode::where('status_id', 1)->first();
+        // Tanggal sekarang
+        $now = now();
+
+        // Jika periode ada dan tanggal pendaftaran belum berakhir
+        $periodeAktif = null;
+        if ($periodes && $periodes->tgl_berakhir >= $now) {
+            $periodeAktif = $periodes;
+
+            // Menghitung jumlah siswa baru yang mendaftar
+            $jumlahSiswaBaru = siswaBaru::where('periode_id', $periodes->id)->count();
+
+            // Menghitung sisa kuota pendaftar
+            $kuotaPendaftar = $periodes->kuota_pendaftar;
+            $sisaKuota = $kuotaPendaftar - $jumlahSiswaBaru;
+        } else {
+            $jumlahSiswaBaru = 0; // Jika periode tidak aktif, jumlah siswa baru dianggap 0
+            $sisaKuota = 0; // Jika periode tidak aktif, sisa kuota dianggap 0
+        }
+
+        return view('components.auth.landing-page-register', compact('periodes', 'periodeAktif', 'jumlahSiswaBaru', 'sisaKuota'));
     }
+
 
     public function registerPost(Request $request){
         $request->validate([
             'name'=>'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:8',
-            'username'=>'required|unique:users'
+            'email'=>'email|unique:users',
+            'password'=>'required',
+            'username'=>'required|unique:users',
+            'tanggal_lahir'=>'required',
+            'tempat_lahir'=>'required',
+            'no_hp'=>'required',
         ],[
-            'name.required'=>'Username wajib diisi',
-            'email.required'=>'Email wajib diisi',
+            'name.required'=>'Nama lengkap wajib diisi',
             'email.unique'=>'Email sudah digunakan',
             'email.email'=>'Silakan masukan email yang valid',
             'password.required'=>'Wajib wajib diisi',
-            'password.max'=>'Password minimal 8 karakter',
             'username.required'=>'Username wajib diisi',
-            'usesrname.unique'=>'Usesrname tidak tersedia'
+            'username.unique'=>'Username tidak tersedia',
+            'tempat_lahir.required'=>'Tempat lahir harus diisi',
+            'tanggal_lahir.required'=>'Tempat lahir harus diisi',
+            'no_hp.required'=>'No HP harus diisi',
         ]);
-
         $data=[
             'name'=>$request->name,
             'role'=>'siswa',
@@ -84,19 +109,31 @@ class UserController extends Controller
 
         // Mendapatkan data siswa berdasarkan user ID pengguna yang sedang login
         $siswaBaru = SiswaBaru::where('user_id', $userId)->first();
-        return view('components.siswa.profile', compact('siswaBaru'));
+        return view('components.siswa.profile', compact('siswaBaru','periodes'));
     }
 
+    public function password() {
+        return view('components.user.ubah-password');
+    }
     public function changePassword(Request $request)
     {
         $request->validate([
-            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+            'new_password' =>'required|string|min:8|confirmed',
+        ],[
+            'new_password.required'=>'Password baru harus diisi',
+            'new_password.min'=>'Password minimal 8 karakter',
+            'new_password.confirmed'=>'Password konfirmasi harus diisi'
         ]);
 
         $user = Auth::user();
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        return back()->with('berhasil', 'Password berhasil diupload.');
+        return back()->with('berhasil', 'Password berhasil diperbarui.');
+    }
+
+    public function index() {
+        $user=User::all();
+        return view('components.user.index', compact('user'));
     }
 }

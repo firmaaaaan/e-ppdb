@@ -51,12 +51,13 @@ class SiswaBaruController extends Controller
     $siswaBaru->kampung = $request->kampung;
     $siswaBaru->desa = $request->desa;
     $siswaBaru->alamat = $request->alamat;
+    $siswaBaru->periode_id = $request->periode_id;
 
     // Periksa kelengkapan data sebelum menyimpan perubahan
     $isComplete = $siswaBaru->name && $siswaBaru->nik && $siswaBaru->jenisKelamin &&
                   $siswaBaru->tempat_lahir && $siswaBaru->tanggal_lahir && $siswaBaru->agama &&
                   $siswaBaru->status && $siswaBaru->nama_ayah && $siswaBaru->pekerjaan_ayah && $siswaBaru->nama_ibu && $siswaBaru->pekerjaan_ibu && $siswaBaru->no_hp && $siswaBaru->kampung && $siswaBaru->desa &&
-                  $siswaBaru->alamat && $siswaBaru->foto && $siswaBaru->kk && $siswaBaru->akta;
+                  $siswaBaru->alamat && $siswaBaru->foto && $siswaBaru->kk && $siswaBaru->akta && $siswaBaru->periode_id;
 
     // Set nilai is_complete berdasarkan kelengkapan data
     $siswaBaru->is_complete = $isComplete;

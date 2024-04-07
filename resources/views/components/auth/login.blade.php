@@ -7,15 +7,7 @@
 		<title>Masuk - SD Sengon 03</title>
 
 		<!-- Meta -->
-		<meta name="description" content="Marketplace for Bootstrap Admin Dashboards" />
-		<meta name="author" content="Bootstrap Gallery" />
-		<link rel="canonical" href="https://www.bootstrap.gallery/">
-		<meta property="og:url" content="https://www.bootstrap.gallery">
-		<meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
-		<meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
-		<meta property="og:type" content="Website">
-		<meta property="og:site_name" content="Bootstrap Gallery">
-		<link rel="shortcut icon" href="logo.jpg" />
+		<link rel="shortcut icon" href="logo2.png" />
 
 		<!-- *************
 			************ CSS Files *************
@@ -36,9 +28,9 @@
 					<form action="{{ route('postLogin') }}" method="POST" class="my-5">
                         @csrf
 						<div class="card p-md-4 p-sm-3">
-							<div class="login-form">
-								<a  class="mb-4 d-flex">
-									<img src="{{ asset('logo.jpg') }}" class="img-fluid login-logo" alt="Bootstrap Gallery" />
+							<div class="login-form ">
+								<a  class="mb-4 d-flex align-items-center justify-center">
+									<img src="{{ asset('logo2.png') }}" class="img-fluid login-logo" alt="SD Sengon 03" />
 								</a>
 								<h2 class="mt-4 mb-4">SD Sengon 03</h2>
                                 @if ($message = Session::get('gagal'))

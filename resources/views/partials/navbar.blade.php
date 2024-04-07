@@ -14,23 +14,17 @@
               Dashboard
             </a>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              Master Data
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="open-tickets.html"><span>Periode pendaftaran</span></a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{{ route('siswa.show') }}"><span>Siswa baru</span></a>
-              </li>
-            </ul>
+          @if(auth()->user()->role == 'admin')
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('index.periode') }}"> Periode Pendaftaran</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="clients.html"> Clients </a>
+            <a class="nav-link" href="{{ route('siswa.show') }}"> Data Siswa</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ route('user.index') }}"> Data User</a>
+          </li>
+          @endif
         </ul>
       </div>
     </div>

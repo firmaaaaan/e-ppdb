@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('siswa_barus', function (Blueprint $table) {
             $table->id();
             $table->string('foto')->nullable();
+            $table->bigInteger('periode_id');
             $table->integer('user_id');
             $table->string('username')->unique();
             $table->string('password');
@@ -36,6 +37,7 @@ return new class extends Migration
             $table->string('kk')->nullable();
             $table->string('akta')->nullable();
             $table->string('is_complete')->nullable();
+            $table->string('pengumuman')->default('2');
             $table->timestamps();
         });
     }

@@ -7,16 +7,11 @@
     <title>@yield('title') - SD Sengon 03</title>
 
     <!-- Meta -->
-    <meta name="description" content="Marketplace for Bootstrap Admin Dashboards" />
-    <meta name="author" content="Bootstrap Gallery" />
-    <link rel="canonical" href="https://www.bootstrap.gallery/">
-    <meta property="og:url" content="https://www.bootstrap.gallery">
-    <meta property="og:title" content="Admin Templates - Dashboard Templates | Bootstrap Gallery">
-    <meta property="og:description" content="Marketplace for Bootstrap Admin Dashboards">
     <meta property="og:type" content="Website">
     <meta property="og:site_name" content="Bootstrap Gallery">
-    <link rel="shortcut icon" href="{{ asset('logo.jpg') }}" />
+    <link rel="shortcut icon" href="{{ asset('logo2.png') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- *************
 			************ CSS Files *************
 		************* -->
@@ -57,10 +52,10 @@
                 <!-- App brand starts -->
                 <div class="app-brand">
                   <a href="index.html" class="d-lg-block d-none">
-                    <img src="{{ asset('logo.jpg') }}" class="logo" alt="Bootstrap Gallery" />
+                    <img src="{{ asset('logo2.png') }}" class="logo" alt="Bootstrap Gallery" />
                   </a>
                   <a href="index.html" class="d-lg-none d-md-block">
-                    <img src="{{ asset('logo.jpg') }}" class="logo" alt="Bootstrap Gallery" />
+                    <img src="{{ asset('logo2.png') }}" class="logo" alt="Bootstrap Gallery" />
                   </a>
                 </div>
                 <!-- App brand ends -->

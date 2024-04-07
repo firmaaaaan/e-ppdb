@@ -33,7 +33,7 @@
                         @endif
                     </div>
                     <div class="col-12 col-md-auto">
-                      <a href="#!" class="btn btn-danger"> Lihat pengumuman</a>
+                      <button href="" class="btn btn-danger"> Lihat pengumuman</button>
                     </div>
                   </div>
                 </div>
@@ -61,6 +61,10 @@
               <div id="ticketsGraph"></div>
               <form action="{{ route('update.profile', $siswaBaru->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
+                <div class="form-group">
+                    <label for="exampleInputName1">Periode Pendaftaran</label>
+                    <input type="hidden" name="periode_id" value="{{ $periodes->id }}" class="form-control" id="exampleInputName1" >
+                </div>
                 <div class="row mt-2">
                     <div class="col-md-6 mt-2">
                         <label class="labels">Username</label>
@@ -78,7 +82,7 @@
                     </div>
                     <div class="col-md-12 mt-2"><label class="labels">Jenis Kelamin*</label>
                         <select name="jenisKelamin" class="form-control"></div>
-                                <option>{{ $siswaBaru->jenisKelamin }}</option>
+                                <option value="">--Jenis Kelamin--</option>
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuasn</option>
                         </select>
@@ -102,21 +106,21 @@
                     <div class="row mt-2">
                         <div class="col-md-6 mt-2">
                             <label class="labels">Nama Ayah</label>
-                            <input type="text" value="" name="nama_ayah" class="form-control" placeholder="Nama ayah">
+                            <input type="text" value="{{ $siswaBaru->nama_ayah }}" name="nama_ayah" class="form-control" placeholder="Nama ayah">
                         </div>
                         <div class="col-md-6 mt-2">
                             <label class="labels">Pekerjaan Ayah</label>
-                            <input type="text" value="" name="pekerjaan_ayah" class="form-control" placeholder="Pekerjaan ayah">
+                            <input type="text" value="{{ $siswaBaru->pekerjaan_ayah }}" name="pekerjaan_ayah" class="form-control" placeholder="Pekerjaan ayah">
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-6 mt-2">
                             <label class="labels">Nama Ibu</label>
-                            <input type="text" value="" name="nama_ibu" class="form-control" placeholder="Nama Ibu">
+                            <input type="text" value="{{ $siswaBaru->nama_ibu }}" name="nama_ibu" class="form-control" placeholder="Nama Ibu">
                         </div>
                         <div class="col-md-6 mt-2">
                             <label class="labels">Pekerjaan Ibu</label>
-                            <input type="text" value="" name="pekerjaan_ibu" class="form-control" placeholder="Pekerjaan Ibu">
+                            <input type="text" value="{{ $siswaBaru->pekerjaan_ibu }}" name="pekerjaan_ibu" class="form-control" placeholder="Pekerjaan Ibu">
                         </div>
                     </div>
                     <div class="col-md-12 mt-3">
@@ -180,9 +184,13 @@
               <form action="{{ route('changePassword') }}" method="POST">
                 @csrf
                 <label for="new_password">Password baru</label>
-                <input type="password" class="form-control" name="new_password" id="new_password" required>
+                <input type="password" class="form-control @error('new_password') is-invalid
+                @enderror" name="new_password" value="{{ old('new_password') }}" id="new_password">
+                @error('new_password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
                 <label for="new_password_confirmation">Konfirmasi password</label>
-                <input type="password" class="form-control" name="new_password_confirmation" id="new_password_confirmation" required>
+                <input type="password" class="form-control" name="new_password_confirmation" id="new_password_confirmation">
                 <button type="submit" class="btn btn-success btn-md mt-3">Ubah password</button>
             </form>
             </div>
