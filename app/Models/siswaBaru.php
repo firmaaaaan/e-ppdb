@@ -4,15 +4,16 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Periode;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
 
 class siswaBaru extends Model
 {
     use HasFactory;
     protected $table ='siswa_barus';
     protected $guarded =['id'];
-    // Relasi balik ke User
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -22,4 +23,5 @@ class siswaBaru extends Model
     {
         return $this->belongsTo(Periode::class);
     }
+
 }

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Periode;
+use App\Models\siswaBaru;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\siswaBaru;
 
 class PeriodeController extends Controller
 {
@@ -14,16 +14,19 @@ class PeriodeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-{
-    $periode = Periode::all();
-    // Mengambil periode tertentu dari input pengguna atau default ke periode pertama jika tidak ada input
-    $selectedPeriodeId = request()->input('periode_id', $periode->first()->id);
+    {
+        $periode = Periode::all();
 
-    // Mengambil jumlah siswa pendaftar berdasarkan periode yang dipilih
-    $jumlahSiswaPendaftar = siswaBaru::where('periode_id', $selectedPeriodeId)->count();
+        // Mendapatkan data jumlah siswa baru berdasarkan periode_id
+        $jumlahSiswaPerPeriode = collect();
+        foreach ($periode as $p) {
+            $jumlahSiswa = siswaBaru::where('periode_id', $p->id)->count();
+            $jumlahSiswaPerPeriode->put($p->id, $jumlahSiswa);
+        }
 
-    return view('components.periode.periode', compact('periode', 'jumlahSiswaPendaftar'));
-}
+        return view('components.periode.periode', compact('periode', 'jumlahSiswaPerPeriode'));
+    }
+
 
 
     /**

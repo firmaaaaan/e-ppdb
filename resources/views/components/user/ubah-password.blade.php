@@ -11,7 +11,12 @@
     <div class="col-12">
       <div class="card">
         <div class="card-body">
-            <form action="{{ route('changePassword') }}" method="POST">
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block mb-2">
+                <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+            </div>
+            @endif
+            <form action="{{ route('update.password.user',$user->id) }}" method="POST">
                 @csrf
                 <label for="new_password">Password baru</label>
                 <input type="password" class="form-control @error('new_password') is-invalid

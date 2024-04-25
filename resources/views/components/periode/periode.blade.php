@@ -51,7 +51,7 @@
                             <td>{{ $item->kuota_pendaftar }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->tgl_mulai)->format('d F Y')  }}</td>
                             <td>{{ \Carbon\Carbon::parse($item->tgl_berakhir)->format('d F Y')  }}</td>
-                            <td>{{ $jumlahSiswaPendaftar }}</td>
+                            <td>{{ $jumlahSiswaPerPeriode[$item->id] }}</td>
                             <td><label for="" class="badge {{ ($item->status_id ==1) ? 'bg-success' : 'bg-danger' }}">{{ ($item->status_id ==1) ? 'Aktif' : 'Tidak Aktif'}}</label></td>
                             <td>
                                 <a href="{{ route('status.periode', $item->id) }}" class="btn {{ ($item->status_id == 1) ? 'btn-danger' : 'btn-success' }} btn-sm"  title="{{ ($item->status_id ==1) ? 'Nonaktifkan' : 'Aktifkan' }}"><i class="bi bi-power"></i></a>

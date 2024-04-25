@@ -23,9 +23,9 @@ class UserController extends Controller
             $user = Auth::user(); // Mendapatkan informasi user yang sedang login
 
             // Cek role pengguna dan arahkan sesuai dengan rolenya
-            if ($user->role === 'admin') {
-                return redirect('/dashboard');
-            } elseif ($user->role === 'siswa') {
+            if (Auth::user()->role == 'admin') {
+                return redirect()->intended('/dashboard');
+            } elseif (Auth::user()->role == 'siswa') {
                 $student = siswaBaru::where('user_id', $user->id)->first(); // Ambil data siswa berdasarkan user_id
                 if ($student) {
                     return redirect('/siswa/profile/'.$student->id); // Mengarahkan ke profil siswa berdasarkan ID siswa
@@ -104,6 +104,7 @@ class UserController extends Controller
         return back()->with('success','Data berhasil disimpan, silakan login');
     }
     public function profile() {
+        $periodes = Periode::where('status_id', 1)->first();
         // Mendapatkan user ID pengguna yang sedang login
         $userId = Auth::id();
 
@@ -112,8 +113,9 @@ class UserController extends Controller
         return view('components.siswa.profile', compact('siswaBaru','periodes'));
     }
 
-    public function password() {
-        return view('components.user.ubah-password');
+    public function password($id) {
+        $user = User::findOrFail($id);
+        return view('components.user.ubah-password', compact('user'));
     }
     public function changePassword(Request $request)
     {
@@ -135,5 +137,22 @@ class UserController extends Controller
     public function index() {
         $user=User::all();
         return view('components.user.index', compact('user'));
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $request->validate([
+            'new_password' =>'required|string|min:8|confirmed',
+        ],[
+            'new_password.required'=>'Password baru harus diisi',
+            'new_password.min'=>'Password minimal 8 karakter',
+            'new_password.confirmed'=>'Password konfirmasi harus diisi'
+        ]);
+
+        $user = User::findOrFail($id);
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Password berhasil diupdate!');
     }
 }

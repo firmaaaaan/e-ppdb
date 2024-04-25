@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('kuota_pendaftar');
             $table->string('tgl_mulai');
             $table->string('tgl_berakhir');
+            $table->string('jumlah_siswa')->default(0);
             $table->timestamps();
         });
     }

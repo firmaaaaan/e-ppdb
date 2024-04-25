@@ -67,22 +67,32 @@
                   <td>{{ $item->jenisKelamin }}</td>
                   <td>{{ $item->tempat_lahir }}</td>
                   <td>{{ $item->tanggal_lahir }}</td>
-                  <td>{{ $item->agama }}</td>
-                  <td>{{ $item->status }}</td>
-                  <td>{{ $item->nama_ayah }}</td>
-                  <td>{{ $item->pekerjaan_ayah }}</td>
-                  <td>{{ $item->nama_ibu }}</td>
-                  <td>{{ $item->pekerjaan_ibu }}</td>
-                  <td>{{ $item->no_hp }}</td>
-                  <td>{{ $item->kampung }}</td>
-                  <td>{{ $item->desa }}</td>
-                  <td>{{ $item->alamat }}</td>
-                  <td>{{ $item->kk }}</td>
-                  <td>{{ $item->akta }}</td>
-                  <td>
-                    <a class="btn btn-primary"><span class="icon-edit"></span></a>
-                    <a class="btn btn-danger"><span class="icon-trash"></span></a>
-                  </td>
+                    <td>{{ $item->agama }}</td>
+                    <td>{{ $item->status }}</td>
+                    <td>{{ $item->nama_ayah }}</td>
+                    <td>{{ $item->pekerjaan_ayah }}</td>
+                    <td>{{ $item->nama_ibu }}</td>
+                    <td>{{ $item->pekerjaan_ibu }}</td>
+                    <td>{{ $item->no_hp }}</td>
+                    <td>{{ $item->kampung }}</td>
+                    <td>{{ $item->desa }}</td>
+                    <td>{{ $item->alamat }}</td>
+                    <td> @if ($item->kk)
+                        <a href="kk/{{ $item->kk }}" class="btn btn-outline-primary"><i class="bi bi-download"></i></a>
+                    @else
+                    belum diinput
+                    @endif
+                    </td>
+                    <td> @if ($item->akta)
+                        <a href="akta/{{ $item->akta }}" class="btn btn-outline-primary"><i class="bi bi-download"></i></a>
+                    @else
+                    belum diinput
+                    @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('edit.siswa', $item->id) }}" class="btn btn-primary" title="Edit"><span class="icon-edit"></span></a>
+                        <a href="{{ route('delete.siswa', $item->id) }}" class="btn btn-danger" title="Hapus"><span class="icon-trash"></span></a>
+                    </td>
                 </tr>
                 @endforeach
               </tbody>

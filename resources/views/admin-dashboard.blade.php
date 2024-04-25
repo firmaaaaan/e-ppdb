@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
-@section('title','Dashboard')
-@section('slide','Dashboards')
+@section('title','Dashboard Admin')
+@section('slide','Dashboards ')
 <div class="col-xl-12 col-12">
     <div class="row gx-2">
       <div class="col-sm-4 col-6">
