@@ -159,6 +159,13 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <select name="jenisKelamin" class="form-control"></div>
+                                    <option value="">--Jenis Kelamin--</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                            </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputPassword4">Password* (Mohon Diingat)</label>
                                 <input name="password" type="password" class="form-control @error('password')
                                 @enderror" id="exampleInputPassword4" value="{{ old('password') }}" placeholder="Password">

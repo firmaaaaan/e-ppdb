@@ -6,6 +6,7 @@ use App\Models\siswaBaru;
 use App\Models\Periode;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class SiswaBaruController extends Controller
 {
@@ -152,8 +153,34 @@ class SiswaBaruController extends Controller
         return back()->with('success','Data siswa dan user terkait berhasil dihapus');
     }
 
-    public function pengumuman() {
-        return view('pengumuman');
+
+
+    public function feedback($id) {
+        $data=DB::table('siswa_barus')->where('id',$id)->first();
+        $status_sekarang=$data->pengumuman;
+        // Mengubah status pengumuman berdasarkan status sebelumnya
+        if ($status_sekarang == 2) {
+            DB::table('siswa_barus')->where('id', $id)->update([
+                'pengumuman' => 1 // Ubah status menjadi 1 (Diterima)
+            ]);
+        } elseif ($status_sekarang == 1) {
+            DB::table('siswa_barus')->where('id', $id)->update([
+                'pengumuman' => 0 // Ubah status menjadi 0 (Menunggu)
+            ]);
+        } else {
+            DB::table('siswa_barus')->where('id', $id)->update([
+                'pengumuman' => 2 // Ubah status menjadi 2 (Ditolak)
+            ]);
+        }
+        return back();
+    }
+
+    public function pengumuman($id) {
+        // Mengambil semua data siswa baru berdasarkan ID tertentu
+    $siswaBaru = SiswaBaru::where('id', $id)->first();
+
+    // Mengirim data siswa baru ke view 'pengumuman'
+    return view('pengumuman', compact('siswaBaru'));
     }
 
 }

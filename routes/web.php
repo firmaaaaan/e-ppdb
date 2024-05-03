@@ -19,10 +19,9 @@ Route::post('/ppdb',[UserController::class,'registerPost'])->name('landing.regis
 
 Route::get('/error', [DashboardController::class ,'error'])->name('error.dashboard');
 
-Route::get('/pengumuman',[SiswaBaruController::class,'pengumuman'])->name('pengumuman');
 
 Route::group(['middleware'=>'access-admin'], function () {
-    Route::get('/admin-dashboard', [DashboardController::class ,'index'])->name('admin.dashboard');
+    Route::get('/admin-dashboard', [DashboardController::class ,'indexAdmin'])->name('admin.dashboard');
     Route::get('/siswa/profile/{id}',[UserController::class,'profile'])->name('profile');
     Route::post('/update/profile/{id}',[siswaBaruController::class,'update'])->name('update.profile');
     Route::get('/data-siswa',[SiswaBaruController::class,'show'])->name('siswa.show');
@@ -39,14 +38,21 @@ Route::group(['middleware'=>'access-admin'], function () {
     Route::get('/ubah-password/{id}',[UserController::class,'password'])->name('user.password');
     Route::post('/update-password-user/{id}',[UserController::class,'updatePassword'])->name('update.password.user');
 
-    Route::post('/update/siswa/{id}',[siswaBaruController::class,'update'])->name('update.siswa');
+    Route::post('/update/siswa/{id}',[siswaBaruController::class,'updateAdmin'])->name('update.siswa');
     Route::get('/edit-siswa/{id}',[SiswaBaruController::class,'edit'])->name('edit.siswa');
     Route::get('/delete-siswa/{id}',[SiswaBaruController::class,'delete'])->name('delete.siswa');
+    Route::get('/status-siswa/{id}',[SiswaBaruController::class ,'feedback'])->name('feedback.siswa');
+
+    Route::get('/delete-user/{id}',[UserController::class,'delete'])->name('delete.user');
+    Route::get('/jumlah-siswa-periode', [DashboardController::class,'jumjumlahSiswaPeriode'])->name('jumlah-siswa-periode');
+
+    Route::get('/get-diagram-data', [DashboardController::class, 'getDataDiagram'])->name('periode.get_diagram_data');
+
 });
 Route::group(['middleware'=>'access-siswa'], function () {
     Route::get('/siswa/profile/{id}',[UserController::class,'profile'])->name('profile');
     Route::post('/update/profile/{id}',[siswaBaruController::class,'update'])->name('update.profile');
     Route::post('/ubah-password',[UserController::class,'changePassword'])->name('changePassword');
     Route::get('/pengumuman/{id}',[SiswaBaruController::class.'pengumuman'])->name('pengumuman.siswa');
-    Route::get('/dashboard', [DashboardController::class ,'index'])->name('index.dashboard');
+    Route::get('/pengumuman/{id}',[SiswaBaruController::class,'pengumuman'])->name('pengumuman');
 });

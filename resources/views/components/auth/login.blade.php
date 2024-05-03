@@ -46,9 +46,6 @@
 									<label class="form-label">Password</label>
 									<div class="input-group">
 										<input type="password" name="password" class="form-control" placeholder="Masukkan password" />
-										<a href="#" class="input-group-text">
-											<i class="icon-eye"></i>
-										</a>
 									</div>
 								</div>
 								<div class="d-grid py-3 mt-3">
@@ -57,7 +54,7 @@
 									</button>
 								</div>
 								<div class="text-center pt-4">
-									<span>Not registered?</span>
+									<span>Belum daftar?</span>
 									<a href="{{ route('landing.register') }}" class="text-success text-decoration-underline">
 										Daftar</a>
 								</div>

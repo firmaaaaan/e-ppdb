@@ -24,7 +24,7 @@ class UserController extends Controller
 
             // Cek role pengguna dan arahkan sesuai dengan rolenya
             if (Auth::user()->role == 'admin') {
-                return redirect()->intended('/dashboard');
+                return redirect()->intended('/periode');
             } elseif (Auth::user()->role == 'siswa') {
                 $student = siswaBaru::where('user_id', $user->id)->first(); // Ambil data siswa berdasarkan user_id
                 if ($student) {
@@ -154,5 +154,10 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->back()->with('success', 'Password berhasil diupdate!');
+    }
+    public function delete($id){
+        $user=User::find($id);
+        $user->delete();
+        return back();
     }
 }

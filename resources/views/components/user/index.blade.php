@@ -55,8 +55,8 @@
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->role }}</td>
                     <td>
-                        <a href="{{ route('user.password', $item->id) }}" class="btn btn-primary" title="Ubah password"><i class="bi bi-key"></i></a>
-                        <a class="btn btn-danger"><span class="icon-trash"></span></a>
+                        <a href="{{ route('user.password', $item->id) }}" class="btn btn-outline-primary" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip-success"  data-bs-title="Ubah Password"><i class="bi bi-key"></i></a>
+                        <a href="{{ route('delete.user', $item->id) }}" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip-danger"  data-bs-title="Hapus"><span class="icon-trash"></span></a>
                     </td>
                 </tr>
                 @endforeach

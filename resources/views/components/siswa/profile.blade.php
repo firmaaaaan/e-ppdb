@@ -33,7 +33,7 @@
                         @endif
                     </div>
                     <div class="col-12 col-md-auto">
-                      <button href="" class="btn btn-danger"> Lihat pengumuman</button>
+                      <a href="{{ route('pengumuman', $siswaBaru->id) }}" class="btn btn-danger"> Lihat pengumuman</a>
                     </div>
                   </div>
                 </div>
@@ -81,10 +81,10 @@
                         <input type="number" name="nik" value="{{ $siswaBaru->nik }}" class="form-control" placeholder="Nomor Induk Keluarga">
                     </div>
                     <div class="col-md-12 mt-2"><label class="labels">Jenis Kelamin*</label>
-                        <select name="jenisKelamin" class="form-control"></div>
-                                <option value="">--Jenis Kelamin--</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
+                        <select name="jenisKelamin" class="form-control">
+                            <option value="">--Jenis Kelamin--</option>
+                            <option value="Laki-laki" {{ $siswaBaru->jenisKelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="Perempuan" {{ $siswaBaru->jenisKelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                         </select>
                     </div>
                     <div class="col-md-12 mt-2">
@@ -160,6 +160,9 @@
                                 <span class="title"> Akta Kelahiran</span>
                                 <input type="file" name="akta" id="">
                             </label>
+                        </div>
+                        <div>
+                            <p>*Pastikan nama file untuk foto, Kartu keluarga dan Akta Kelahiran menggunakan nama siswa masing-masing (contoh: Foto-Andi Firdaus, KK-Andi Firdaus, Akta Andi Firdaus )</p>
                         </div>
                 </div>
                 <div class="mt-2 text-center">

@@ -12,21 +12,18 @@
     <link rel="shortcut icon" href="{{ asset('logo2.png') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.css">
     <!-- *************
 			************ CSS Files *************
 		************* -->
+
+        @yield('chart')
     <!-- Icomoon Font Icons css -->
     <link rel="stylesheet" href="{{ asset('assets') }}/fonts/icomoon/style.css" />
-
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ asset('assets') }}/css/main.min.css" />
+    @yield('cc')
     @yield('dataTablesCss')
-
-
-    <!-- *************
-			************ Vendor Css Files *************
-		************ -->
-
     <!-- Scrollbar CSS -->
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/overlay-scroll/OverlayScrollbars.min.css" />
   </head>
@@ -51,11 +48,8 @@
 
                 <!-- App brand starts -->
                 <div class="app-brand">
-                  <a href="index.html" class="d-lg-block d-none">
-                    <img src="{{ asset('logo2.png') }}" class="logo" alt="Bootstrap Gallery" />
-                  </a>
-                  <a href="index.html" class="d-lg-none d-md-block">
-                    <img src="{{ asset('logo2.png') }}" class="logo" alt="Bootstrap Gallery" />
+                  <a href="{{ route('index.periode') }}" class="d-lg-block d-none">
+                    <img src="{{ asset('logo2.png') }}" class="logo" alt="SD Sengon O3" />
                   </a>
                 </div>
                 <!-- App brand ends -->

@@ -1,22 +1,64 @@
 @extends('layouts.master')
 @section('content')
 @section('title','Form')
-@section('slide','Form')
-<div class="col-12">
-    <div class="page-header">
-      <h4 class="page-title">Form edit data siswa</h4>
-    </div>
-  </div>
-<div class="row flex-grow mx-6">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-block mb-2">
-                    <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+@section('slide','Form')<style>
+    .wrapper{
+        height: 150px;
+        width: 150px;
+        position: relative;
+        border: 3px solid #fff;
+        border-radius: 50%;
+    }
+</style>
+    <!-- Row start -->
+    <div class="row gx-2">
+        <div class="col-12">
+          <div class="card mb-2">
+            <div class="card-body">
+              <div class="profile-bg p-5 rounded-3 mb-4">
+                <!-- Row start -->
+                <div class="bg-dark px-4 p-2 rounded-3">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <img class="wrapper" src="{{ asset('foto/'.$siswaBaru->foto) }}" class="img-5x rounded-circle" />
+                    </div>
+                    <div class="col">
+                      <h5 class="fw-light">{{ $siswaBaru->name  }}</h5>
+                      <h6 class="m-0 fw-semibold">{{ $siswaBaru->email  }}</h6>
+                        @if ($siswaBaru->is_complete == 1)
+                            <div class="badge bg-success">Data sudah lengkap.</div>
+                        @else
+                            <div class="badge bg-danger">Data belum lengkap, silakan lengkapi data</div>
+                        @endif
+                    </div>
+                    <div class="col-12 col-md-auto">
+                      <button href="" class="btn btn-danger"> Lihat pengumuman</button>
+                    </div>
+                  </div>
                 </div>
-            @endif
-            <form action="{{ route('update.siswa', $siswaBaru->id) }}" method="post" enctype="multipart/form-data">
+                <!-- Row end -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Row end -->
+
+      <!-- Row start -->
+      <div class="row gx-2">
+        <div class="col-xl-12 col-sm-12 col-12">
+          <div class="card mb-2">
+            <div class="card-header">
+              <h5 class="card-title">Data siswa</h5>
+            </div>
+            <div class="card-body">
+                @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block mb-2">
+                            <p><i class="bi bi-lightbulb-fill"></i><strong> Pemberitahuan! </strong>{{ $message }}</p>
+                        </div>
+                        @endif
+              <div id="ticketsGraph"></div>
+              <form action="{{ route('update.siswa', $siswaBaru->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputName1">Periode Pendaftaran</label>
@@ -38,10 +80,10 @@
                         <input type="number" name="nik" value="{{ $siswaBaru->nik }}" class="form-control" placeholder="Nomor Induk Keluarga">
                     </div>
                     <div class="col-md-12 mt-2"><label class="labels">Jenis Kelamin*</label>
-                        <select name="jenisKelamin" class="form-control"></div>
-                                <option value="">--Jenis Kelamin--</option>
-                                <option value="Laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
+                        <select name="jenisKelamin" class="form-control">
+                            <option value="">--Jenis Kelamin--</option>
+                            <option value="Laki-laki" {{ $siswaBaru->jenisKelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                            <option value="Perempuan" {{ $siswaBaru->jenisKelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                         </select>
                     </div>
                     <div class="col-md-12 mt-2">
@@ -97,34 +139,38 @@
                         <textarea type="text" name="alamat"  class="form-control" placeholder="Alamat">{{ $siswaBaru->alamat }}</textarea>
                     </div>
                     <label for="" class="labels mt-3">Upload Berkas</label>
-                        <div class=" col-md-2 mt-3">
+                        <div class=" col-md-4 mt-3">
                             <label class="label">
                                 <i class="bi bi-paperclip"></i>
                                 <span class="title"> Pas Foto (4x6)</span>
                                 <input type="file" name="foto" id="">
                             </label>
                         </div>
-                        <div class=" col-md-2 mt-3">
+                        <div class=" col-md-4 mt-3">
                             <label class="label">
                                 <i class="bi bi-paperclip"></i>
                                 <span class="title"> Kartu keluarga</span>
                                 <input type="file" name="kk" id="">
                             </label>
                         </div>
-                        <div class="col-md-2 mt-3">
+                        <div class="col-md-4 mt-3">
                             <label class="label">
                                 <i class="bi bi-paperclip"></i>
                                 <span class="title"> Akta Kelahiran</span>
                                 <input type="file" name="akta" id="">
                             </label>
                         </div>
+                        <div>
+                            <p>*Pastikan nama file untuk foto, Kartu keluarga dan Akta Kelahiran menggunakan nama siswa masing-masing (contoh: Foto-Andi Firdaus, KK-Andi Firdaus, Akta Andi Firdaus )</p>
+                        </div>
                 </div>
                 <div class="mt-2 text-center">
                     <button class="btn btn-success profile-button" type="submit">Simpan</button>
                 </div>
               </form>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
+      <!-- Row end -->
 @endsection

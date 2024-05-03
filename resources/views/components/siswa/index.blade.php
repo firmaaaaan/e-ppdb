@@ -52,6 +52,7 @@
                   <th>Alamat Lengkap</th>
                   <th>Kartu Keluarga</th>
                   <th>Akta Kelahiran</th>
+                  <th>Pengumuman</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -90,8 +91,20 @@
                     @endif
                     </td>
                     <td>
-                        <a href="{{ route('edit.siswa', $item->id) }}" class="btn btn-primary" title="Edit"><span class="icon-edit"></span></a>
-                        <a href="{{ route('delete.siswa', $item->id) }}" class="btn btn-danger" title="Hapus"><span class="icon-trash"></span></a>
+                        @if ($item->pengumuman ==2)
+                            <label for="" class="badge bg-warning">{{ ($item->pengumuman ==2) ? 'Diproses' : ''}}</label>
+                        @elseif ($item->pengumuman ==1)
+                            <label for="" class="badge bg-primary">{{ ($item->pengumuman ==1) ? 'Diterima' : ''}}</label>
+                        @elseif ($item->pengumuman ==0)
+                            <label for="" class="badge bg-danger">{{ ($item->pengumuman ==0) ? 'Tidak Diterima' : ''}}</label>
+                        @endif
+                        <a href="{{ route('feedback.siswa', $item->id) }}" class="btn {{ ($item->pengumuman == 2) ? 'btn-success' : (($item->pengumuman == 0) ? 'btn-warning' : 'btn-danger') }} btn-sm"  title="{{ ($item->pengumuman == 2) ? 'Diterima' : (($item->pengumuman == 3) ? 'Menunggu' : 'Ditolak') }}">
+                            <i class=" {{ ($item->pengumuman == 2) ? 'icon-check1' : (($item->pengumuman == 0) ? 'icon-clock' : 'icon-x-square') }}"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ route('edit.siswa', $item->id) }}" class="btn btn-outline-primary" data-bs-custom-class="custom-tooltip-success" data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-title="Edit"><span class="icon-edit"></span></a>
+                        <a href="{{ route('delete.siswa', $item->id) }}" class="btn btn-outline-danger" data-bs-custom-class="custom-tooltip-danger" data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-title="Hapus"><span class="icon-trash"></span></a>
                     </td>
                 </tr>
                 @endforeach

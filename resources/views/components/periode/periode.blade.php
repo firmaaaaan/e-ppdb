@@ -54,10 +54,15 @@
                             <td>{{ $jumlahSiswaPerPeriode[$item->id] }}</td>
                             <td><label for="" class="badge {{ ($item->status_id ==1) ? 'bg-success' : 'bg-danger' }}">{{ ($item->status_id ==1) ? 'Aktif' : 'Tidak Aktif'}}</label></td>
                             <td>
-                                <a href="{{ route('status.periode', $item->id) }}" class="btn {{ ($item->status_id == 1) ? 'btn-danger' : 'btn-success' }} btn-sm"  title="{{ ($item->status_id ==1) ? 'Nonaktifkan' : 'Aktifkan' }}"><i class="bi bi-power"></i></a>
-                                <a href="{{ route('edit.periode', $item->id) }}" class="btn btn-primary btn-sm"  title="Edit"><i class="bi bi-pencil-square"></i></a>
-                                <a href="{{ route('delete.periode', $item->id) }}" class="btn btn-danger btn-sm"  title="Hapus"><i class="bi bi-trash"></i></a>
-                            </td>
+                                <a href="{{ route('status.periode', $item->id) }}" class="btn {{ ($item->status_id == 1) ? 'btn-danger' : 'btn-success' }} btn-sm" title="{{ ($item->status_id ==1) ? 'Nonaktifkan' : 'Aktifkan' }}"><i class="bi bi-power"></i></a>
+                                </a>
+                                <a href="{{ route('edit.periode', $item->id) }}" data-bs-toggle="tooltip" data-bs-placement="top" class="btn btn-outline-primary btn-sm" data-bs-custom-class="custom-tooltip-success"  data-bs-title="Edit">
+                                  <i class="icon-edit"></i>
+                                </a>
+                                <a href="{{ route('delete.periode', $item->id) }}" data-bs-toggle="tooltip" data-bs-placement="top" class="btn btn-outline-danger btn-sm" data-bs-custom-class="custom-tooltip-danger"  data-bs-title="Hapus">
+                                  <i class="icon-trash"></i>
+                                </a>
+                              </td>
                         </tr>
                         @endforeach
                     </tbody>
